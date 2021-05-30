@@ -11,6 +11,8 @@ After having done that clone the repository and attempt to install the dependenc
 
 ``npm install``
 
-After that finishes the app should be runnable using
+After that finishes the app should be runnable using the script
 
 ```npm start```
+
+If the above doesn't work just contact me real quick. Electron bundles the entire Chromium instance which might be downloaded correctly through the dependencies.
