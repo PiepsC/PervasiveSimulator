@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="./styles.css" />
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <div id="grid" class="grid">
+      <svg id="svgcontainer" class="hex">
+        <clipPath id="clipMask">
+          <rectangle id="mask" width="0%" height="100%"></rectangle>
+        </clipPath>
+      </svg>
+    </div>
+    <!-- <i class="hexagon"></i> -->
+    <script src="./gridLogic.js"></script>
+  </body>
+</html>

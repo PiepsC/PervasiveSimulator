@@ -1,0 +1,38 @@
+html, 
+body,
+.root{
+    --size:2;
+    --thick:3px;
+    --width:18px;
+    --initColor:white;
+    --mediorColor:rgb(200,255,20);
+    --color:green;
+    --maskWidth:1920px;
+    --maskHeight:1080px;
+}
+.hex {
+    animation: fadein 3s, colorfade 4s, opacityfade 2s;
+    animation-iteration-count: 1;
+    opacity: 1;
+    fill: none;
+    stroke: var(--color);
+    stroke-width: var(--thick);
+}
+.grid {
+    white-space: nowrap; /* Prevents graphics from wrapping to next line */
+}
+
+@keyframes fadein {
+    from {width:0%} to {width:100%}
+}
+
+@keyframes opacityfade {
+    from {opacity: 0} to {opacity: 1}
+}
+
+@keyframes colorfade {
+    0% {stroke:var(--initColor)}
+    80% {stroke:var(--initColor)}
+    95% {stroke:var(--mediorColor)}
+    100% {stroke:var(--color)}
+}
