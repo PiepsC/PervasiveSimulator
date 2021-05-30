@@ -16,3 +16,7 @@ After that finishes the app should be runnable using the script
 ```npm start```
 
 If the above doesn't work just contact me real quick. Electron bundles the entire Chromium instance which might be downloaded correctly through the dependencies.
+
+# Notes
+
+DO NOT push changes to the master branch directly. If altering anything first branch off, then pull request before merging.
