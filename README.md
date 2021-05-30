@@ -4,4 +4,13 @@ Masters project for the course Pervasive Systems
 # Dependencies
 I've intentionally kept the dependencies as small as possible as Electron on its own is already pretty bloated. No framework or CDN is being used. It only uses Electron-Forge for building purposes.
 
-Download Nodejs and then run "npm install" in the repository to get the dependencies.
+To run you must first download [Nodejs](https://nodejs.org/en/). I suggest downloading the LTS version. Make sure to check the installation is succesful by issueing:
+```npm --version```
+
+After having done that clone the repository and attempt to install the dependencies from the lock file by using:
+
+``npm install``
+
+After that finishes the app should be runnable using
+
+```npm start```
