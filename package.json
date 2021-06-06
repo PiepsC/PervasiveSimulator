@@ -14,7 +14,6 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "form-data": "^4.0.0",
-    "sharp": "^0.28.3",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -23,7 +22,8 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.57",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
     "@electron-forge/maker-zip": "^6.0.0-beta.57",
-    "electron": "^13.0.1"
+    "electron": "^13.0.1",
+    "sharp": "^0.28.3"
   },
   "config": {
     "forge": {
