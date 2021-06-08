@@ -1,6 +1,6 @@
 const child_process = require('child_process');
 const fs = require('fs');
-const host = `localhost`, path = `/index.php`
+const host = `130.89.83.158`, path = `/json`
 var http = require('http');
 var FormData = require('form-data');
 let bats = 0, nonbats = 0;
@@ -52,7 +52,7 @@ fs.readdir(String.raw`.\images`,
     })
 
 function Get_random(nonbat = false){
-    return nonbat ? Math.round(Math.random() * nonbats) : Math.round(Math.random() * bats);
+    return nonbat ? Math.max(Math.round(Math.random() * nonbats), 1) : Math.max(Math.round(Math.random() * bats), 1);
 }
 
 /*
