@@ -10,8 +10,16 @@ body,
     --maskWidth:1920px;
     --maskHeight:1080px;
 }
+
+.leafmap {
+    height: var(--maskHeight);
+    position: relative;
+    z-index: 1;
+}
+
 .hex {
     animation: fadein 3s, colorfade 4s, opacityfade 2s;
+    background-color: rgba(red, green, blue, 0);
     animation-iteration-count: 1;
     opacity: 1;
     fill: none;
@@ -20,6 +28,9 @@ body,
 }
 .grid {
     white-space: nowrap; /* Prevents graphics from wrapping to next line */
+    background-color: rgba(red, green, blue, 0);
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes fadein {

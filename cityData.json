@@ -1,0 +1,15 @@
+{
+	"london": {
+		"box" : [51.670843, -0.518731, 51.292832, 0.240757],
+		"age_area" : {
+			"enabled" : false,
+			"intensity" : 0,
+			"box" : []
+		},
+		"other_area" : {
+			"enabled" : false,
+			"intensity" : 0,
+			"box" : []
+		}
+	}
+}

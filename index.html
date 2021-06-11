@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="./styles.css" />
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" href="./leaflet/leaflet.css"/>
+    <script src="./leaflet/leaflet.js"></script>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
   </head>
   <body>
-    <div id="grid" class="grid">
+  <div id="viewport">
+    <!-- <div id="grid" class="grid">
       <svg id="svgcontainer" class="hex">
         <clipPath id="clipMask">
-          <rectangle id="mask" width="0%" height="100%"></rectangle>
         </clipPath>
       </svg>
-    </div>
+    </div> -->
+    <div id="llmap" class="leafmap"></div>
+  </div>
     <!-- <i class="hexagon"></i> -->
-    <script src="./gridLogic.js"></script>
+    <script src ="./leafLogic.js"></script>
+    <!-- <script src="./gridLogic.js"></script> -->
   </body>
 </html>
