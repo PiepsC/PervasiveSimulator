@@ -2,25 +2,59 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     <link rel="stylesheet" href="./leaflet/leaflet.css"/>
     <script src="./leaflet/leaflet.js"></script>
+    <script src="./leaflet/leaflet-heat.js"></script>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
   </head>
   <body>
   <div id="viewport">
-    <!-- <div id="grid" class="grid">
-      <svg id="svgcontainer" class="hex">
-        <clipPath id="clipMask">
-        </clipPath>
-      </svg>
-    </div> -->
+    <div class="menu">
+      <ul class="tree">    
+        <li class="section">
+          <input type="checkbox" id="simOptions"/>
+          <label for="simOptions">Simulation options</label>
+          <ul>
+            <li>
+              <label for="city">City to simulate: </label>
+              <select id="city" value="london" name="city">
+                <option value="london">London</option>
+                <option value="enschede">Enschede</option>
+                <option value="delhi">New Delhi</option>
+              </select>
+            </li>
+            <li>
+              <label for="minsensors">Sensor density per cell (min, additional):</label>
+              <input type="number" id="minsensors" name="minsensors" value="1" min="1" max="3">
+              <input type="number" id="maxsensors" name="maxsensors" value="1" min="0" max="3">
+            </li>
+            <li>
+              <label for="gridres">Grid scaling (10=high res, 1=low res):</label>
+              <input type="number" id="gridres" name="gridres" value="5" min="1" max="10">
+            </li>
+            <li>
+              <label for="drawgrid">Draw grid for current city:</label>
+              <button id="drawgrid">Generate</button>
+            </li>
+            <li>
+              <label for="simstart">Place sensors on current map:</label>
+              <button id="simstart">Generate</button>
+            </li>
+            <li>
+              <label for="evolve">Simulate next evolution (produces heatmap):</label>
+              <button id="evolve">Generate</button>
+            </li>
+          </ul>
+        </li>
+   
+      </ul>
+    </div>
     <div id="llmap" class="leafmap"></div>
   </div>
-    <!-- <i class="hexagon"></i> -->
     <script src ="./leafLogic.js"></script>
-    <!-- <script src="./gridLogic.js"></script> -->
   </body>
 </html>

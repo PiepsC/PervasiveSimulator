@@ -12,7 +12,12 @@ body,
 }
 
 .leafmap {
+    position: relative;
     height: var(--maskHeight);
+    z-index: 2;
+}
+
+.menu {
     position: relative;
     z-index: 1;
 }
@@ -47,3 +52,66 @@ body,
     95% {stroke:var(--mediorColor)}
     100% {stroke:var(--color)}
 }
+
+.leaflet-top.leaflet-right .leaflet-control-layers:nth-child(3) .leaflet-control-layers-toggle {
+    background-image: './images/layers.png'
+}
+
+.tree, .section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree {
+  background: #fbfbfb;
+  border: 3px solid black;
+}
+.tree li {
+  padding: 1em 0px;
+}
+
+.section ul  { 
+    position: relative;
+    max-height: 0px;
+    opacity: 0;
+    transition: all 0.2s ease-in;
+ }
+.section input:checked ~ ul { max-height:250px; opacity: 1; }
+.section input:not(:checked) ~ ul { max-height: 0px; opacity: 0;}
+
+.section input[type=checkbox] { display: none; }
+
+.section { 
+  position: relative; 
+  padding-left: 25px !important;
+}
+
+.section li{ 
+  position: relative; 
+  padding-left: 25px !important;
+}
+
+.section li:after{
+  content: ">";
+  position: absolute;
+  top: 0; left: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.section label:after {
+  content: ">";
+  position: absolute;
+  top: 0; left: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+.section input:checked ~ label:after { 
+  transform: rotate(90deg);
+}
+.section ul li { color: black; height: 0px; }
+
