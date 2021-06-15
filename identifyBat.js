@@ -5,11 +5,9 @@ var str = '';
 process_image()
 
 async function process_image(){
-    let binData = await sharp(String.raw`images\bat-${process.argv[4]}.jpg`) //Change to forward slash on linux systems
+    let binData = await sharp(String.raw`images\\${process.argv[5]}bat-${process.argv[4]}.jpg`) //Change to forward slash on linux systems
         .raw()
         .toBuffer({ resolveWithObject: false }); //Sharp is brilliant at reformatting the images if necessary
-
-        //console.log(binData);
         
         try{
             var request = http.request({
