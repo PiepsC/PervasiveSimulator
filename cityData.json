@@ -4,16 +4,31 @@
 		"sensors" : ["wifi-counting", "thermal-imaging", "bat-camera", "ultrasonic-counting"],
 		"mandatory_sensors" : ["wifi-counting", "bat-camera"],
 		"anomalies" : ["oceanic", "noisy"],
-		"population_count" : 9425622,
-		"age_area" : {
-			"enabled" : false,
-			"intensity" : 0,
-			"box" : []
-		},
-		"other_area" : {
-			"enabled" : false,
-			"intensity" : 0,
-			"box" : []
+		"population_distribution" : {
+			"total" : 9425622,
+			"deviation" : 0.3,
+			"areas": {
+					"city_center" : {
+					"box" : [51.596415, -0.271552, 51.435752, 0.069085],
+					"intensity" : 0.6,
+					"outer" : false
+					}
+				}
+			},
+		"diabetes_total" : 600000,
+		"cardiovascular_conditions" : 800000,
+		"asthmatic_conditions" : 600000,
+		"age_average" : {
+			"average" : 37,
+			"deviation" : 0.4,
+			"areas" : {
+					"outer_ring" : {
+					"box" : [51.596415, -0.271552, 51.435752, 0.069085],
+					"intensity" : 1.3,
+					"outer" : true
+					}
+				}
+
+			}
 		}
-	}
 }
