@@ -15,6 +15,8 @@
 					}
 				}
 			},
+		"coefficients" : [0, -0.017579, 0.015234, 0.00196, -0.000234],
+		"bat_bound" : 10,
 		"diabetes_total" : 600000,
 		"cardiovascular_conditions" : 800000,
 		"asthmatic_conditions" : 600000,
@@ -30,5 +32,79 @@
 				}
 
 			}
+		},
+	"delhi": {
+		"box" : [28.769643, 77.016123, 28.525092, 77.296054],
+		"sensors" : ["wifi-counting", "thermal-imaging", "bat-camera", "ultrasonic-counting"],
+		"mandatory_sensors" : ["wifi-counting", "bat-camera"],
+		"anomalies" : ["tropical", "noisy"],
+		"population_distribution" : {
+			"total" : 30291000,
+			"deviation" : 0.3,
+			"areas": {
+					"city_center" : {
+					"box" : [28.678819, 77.178682, 28.578169, 77.257616],
+					"intensity" : 0.3,
+					"outer" : false
+					}
+				}
+			},
+		"coefficients" : [0, -0.001629, -0.002130, 0.001002, -0.000037],
+		"bat_bound" : 15,
+		"diabetes_total" : 3574338,
+		"cardiovascular_conditions" : 5831017,
+		"asthmatic_conditions" : 3541017,
+		"age_average" : {
+			"average" : 44,
+			"deviation" : 0.4,
+			"areas" : {
+					"city_center" : {
+					"box" : [28.678819, 77.178682, 28.578169, 77.257616],
+					"intensity" : 0.8,
+					"outer" : false
+					}
+				}
+
+			}
+	},
+	"enschede": {
+		"box" : [52.252039, 6.833086, 52.187888, 6.941535],
+		"sensors" : ["wifi-counting", "thermal-imaging", "bat-camera", "ultrasonic-counting"],
+		"mandatory_sensors" : ["wifi-counting", "bat-camera"],
+		"anomalies" : ["oceanic", "calm"],
+		"population_distribution" : {
+			"total" : 158553,
+			"deviation" : 0.3,
+			"areas": {
+					"city_center" : {
+					"box" : [52.227862, 6.874613, 52.208091, 6.914423],
+					"intensity" : 0.4,
+					"outer" : false
+					},
+					"university_twente" : {
+					"box" : [52.246574, 6.841323, 52.233539, 6.866376],
+					"intensity" : 0.15,
+					"outer" : false
+					}
+				}
+			},
+		"coefficients" : [0, -0.017579, 0.015234, 0.00196, -0.000234],
+		"bat_bound" : 10,
+		"diabetes_total" : 9768,
+		"cardiovascular_conditions" : 9887,
+		"asthmatic_conditions" : 10687,
+		"age_average" : {
+			"average" : 40,
+			"deviation" : 0.3,
+			"areas" : {
+					"university" : {
+					"box" : [52.246574, 6.841323, 52.233539, 6.866376],
+					"intensity" : 0.65,
+					"outer" : false
+					}
+				}
+
 		}
+
+	}
 }

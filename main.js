@@ -2,11 +2,12 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const utils = require('./generatorLogic.js');
 const fs = require('fs');
 
-var grid, sensors, cells, mandatory_sensors, population_per_cell, anomalies;
+var grid, sensors, cells, mandatory_sensors, population, population_deviation, anomalies, diabetes_cases, cardiovascular_cases, asthmatic_cases, highest_estimate_pop, highest_estimate_age, highest_estimate_comorbidities, coefficients, bat_bound, simDone;
 
 ipcMain.on('request-renderdata', (event, arg) => {
     console.log("received request for renderdata");
     grid = [];
+    simDone = false;
     fs.readFile('./cityData.json', 'utf-8', (err, data) => {
         if(err) console.error(`Failed to read city data`);
         else {
@@ -15,11 +16,45 @@ ipcMain.on('request-renderdata', (event, arg) => {
             results =  utils.data.grid_generator(params[arg[0]].box, arg[1]);
             grid = results[0];
             cells = results[1];
-            population_per_cell = params[arg[0]].population_count/cells;
-            console.log(`average ${population_per_cell}`)
+
+            population = params[arg[0]].population_distribution.total;
+            population_deviation = params[arg[0]].population_distribution.deviation;
+            population_areas = params[arg[0]].population_distribution.areas;
+
+            age_average = params[arg[0]].age_average.average;
+            age_deviation = params[arg[0]].age_average.deviation;
+            age_areas = params[arg[0]].age_average.areas;
+
+            diabetes_cases = params[arg[0]].diabetes_total;
+            cardiovascular_cases = params[arg[0]].cardiovascular_conditions;
+            asthmatic_cases = params[arg[0]].asthmatic_conditions;
+
+            coefficients = params[arg[0]].coefficients;
+            bat_bound = params[arg[0]].bat_bound;
+
             anomalies = params[arg[0]].anomalies;
             mandatory_sensors = params[arg[0]].mandatory_sensors;
             sensors = params[arg[0]].sensors;
+            highest_estimate_pop = utils.data.population_per_box(grid, population_areas, population, population_deviation); //This sets the cell estimation PRIOR to sensing
+            highest_estimate_age = utils.data.age_per_box(grid, age_areas, age_average, age_deviation);
+            highest_estimate_comorbidities = utils.data.comorbidities_distributed(grid, cells, population, diabetes_cases, cardiovascular_cases, asthmatic_cases);
+            // console.log(`city data: cells: ${cells}
+            //             \n population: ${population}
+            //             \n population_dev: ${population_deviation}
+            //             \n population_areas ${population_areas}
+            //             \n age_avg: ${age_average}
+            //             \n age_dev ${age_deviation}
+            //             \n age_areas ${age_areas}
+            //             \n diabetes ${diabetes_cases}
+            //             \n cardio ${cardiovascular_cases}
+            //             \n asthmatic ${asthmatic_cases}
+            //             \n coeffs ${coefficients}
+            //             \n bat_bound ${bat_bound}
+            //             \n anomalies ${anomalies}
+            //             \n mandatory_sensors ${mandatory_sensors}
+            //             \n highest pop ${highest_estimate_pop}
+            //             \n highest age ${highest_estimate_age}
+            //             \n highest morb ${highest_estimate_comorbidities}`);
             event.reply('request-renderdata-response', grid);
         }
     })
@@ -32,9 +67,16 @@ ipcMain.on('request-sensors', (event, arg) => {
     event.reply('request-sensors-response', grid);
 });
 
-ipcMain.on('request-simulate', (event, arg) => {
-    utils.data.sensor_simulator(grid, population_per_cell, anomalies);
-    event.reply('request-simulate-response', [grid, population_per_cell]);
+ipcMain.on('request-simulate', async (event, _) => {
+    if(!simDone){
+        let bat_cams = [];
+        bat_cams = utils.data.sensor_simulator(grid, population_deviation, anomalies);
+        // utils.data.bat_camera_simulator(bat_cams, [`./images/bat-1.jpg`, `./images/bat-2.jpg`, `./images/bat-3.jpg`, `./images/nobat-3.jpg`, `./images/nobat-2.jpg`, `./images/nobat-1.jpg`], anomalies).then((msg) => {
+        // });
+        utils.data.calculate_risk(grid, highest_estimate_pop, highest_estimate_age, highest_estimate_comorbidities, coefficients, bat_bound);
+        simDone = true;
+    }
+    event.reply('request-simulate-response', grid);
 });
 
 
@@ -56,5 +98,3 @@ function createWindow() {
 }
 
 app.on("ready", createWindow);
-
-// ICU beds, Age, weak people

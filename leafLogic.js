@@ -8,6 +8,8 @@ var gridLayer = L.layerGroup().addTo(worldMap);
 var heatLayer = L.layerGroup().addTo(worldMap);
 var nodes = [];
 
+// L.heatLayer([[51.505, -0.09, 0.8]], {radius: 50, minOpacity: 0.3}).addTo(heatLayer);
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	attribution: '',
 	maxZoom: 18,
@@ -52,6 +54,7 @@ function clearGrid(){
     gridLayer.clearLayers();
 }
 
+
 document.getElementById("simstart").onclick = () => {
     place_sensors();
 };
@@ -65,9 +68,21 @@ document.getElementById("evolve").onclick = () => {
 };
 
 function assign_node_stats(grid) {
+    clearHeatmap();
+    let heatlist = [];
     for(i=0; i < grid.length; i++){
-        nodes[i].bindPopup(`People in this area: ${Math.round(grid[i].population)}\nBats detected here: ${Math.round(grid[i].bats)}`);
+        nodes[i].setStyle({fillOpacity: 0.0, color: !(grid[i].highRisk || grid[i].lowRisk) ? "grey" : (grid[i].highRisk ? "red" : (grid[i].lowRisk ? "green" : "grey")), strokeOpacity: 0.3});
+        nodes[i].bindPopup(
+        `People: ${Math.round(grid[i].population)}
+        Bats: ${Math.round(grid[i].bats)}
+        Age: ${Math.round(grid[i].average_age)}
+        Diabetics: ${Math.round(grid[i].diabetes_cases)}
+        Cardiovascular: ${Math.round(grid[i].cardiovascular_cases)}
+        Asthmatic: ${Math.round(grid[i].asthmatic_cases)}
+        Risk: ${grid[i].risk}`);
+        heatlist.push([grid[i].center[0], grid[i].center[1], grid[i].risk]);
     }
+    L.heatLayer(heatlist, {radius: 50, maxZoom: 12, gradient: {0.2 : 'green', 0.3 : 'yellow', 0.4 : 'orange', 0.7 : 'red', 0.8 : 'red'}}).addTo(heatLayer);
 }
 
 function draw_grid_city(city){
@@ -76,6 +91,7 @@ function draw_grid_city(city){
 }
 
 ipcRenderer.on('request-renderdata-response', (event, arg) => {
+    nodes = [];
     arg.forEach(cell => {
         polys = [];
         vert = [];
@@ -86,7 +102,7 @@ ipcRenderer.on('request-renderdata-response', (event, arg) => {
                 vert = []
             }
         })
-        var hex = L.polygon(polys, {fillOpacity: 0.2, color: cell.buffer ? "white" : (cell.highRisk ? "red" : (cell.lowRisk ? "green" : "grey")), strokeOpacity: 0.3}).addTo(gridLayer);
+        var hex = L.polygon(polys, {fillOpacity: 0.0, color: cell.buffer ? "white" : (cell.highRisk ? "red" : (cell.lowRisk ? "green" : "grey")), strokeOpacity: 0.3}).addTo(gridLayer);
         nodes.push(hex);
     });
     console.log(`logging polys ${polys.length}`)
@@ -101,7 +117,7 @@ ipcRenderer.on('request-sensors-response', (event, arg) => {
     })
 })
 
-ipcRenderer.on('request-simulate-response', (event, arg) => {assign_node_stats(arg[0])})
+ipcRenderer.on('request-simulate-response', (event, arg) => {assign_node_stats(arg)})
 
 function onMapClick(e) {
     console.log(`Map coords ${e.latlng}`);
