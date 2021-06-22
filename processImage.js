@@ -1,7 +1,7 @@
 const { parentPort } = require('worker_threads');
-const host = `130.89.83.158`, path = `/json`;
+const host = `130.89.83.158`, path = `/json`; //Add backend IP and routing path here
 const fs = require('fs');
-var http = require('http'); //http://130.89.83.158:5000/json
+var http = require('http'); 
 
 //This file is being spawned as a worker thread
 parentPort.on('message', (param) => {
@@ -31,6 +31,6 @@ parentPort.on('message', (param) => {
         request.write(binData);
         request.end()
     } catch(err) {
-        console.error("look an error lol" + err); //TODO: eh
+        console.error("Error processing binary data:" + err);
     }
 })

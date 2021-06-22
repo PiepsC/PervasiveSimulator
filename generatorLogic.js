@@ -247,7 +247,7 @@ var util = {
                         deviation = Math.random() > 0.5 ? -deviation : deviation; //Sign toss
                         let suboptimal_loss = 0.8 + (0.4 * Math.random()); //Sensors in suboptimal circumstances, causing up to 20% distortion
                         let batHit = anomaly.includes("tropical") ? Math.random() > 0.65 : Math.random() > 0.8; //20% to detect a bat in non tropical, 35% in tropical areas
-                        let batcount = anomaly.includes("tropical") ? Math.random() * 9 : Math.random() * 6; //Up to 8 bats per hit in tropical, 7 for non tropical
+                        let batcount = anomaly.includes("tropical") ? Math.random() * 10 : Math.random() * 7; //Up to 8 bats per hit in tropical, 7 for non tropical
 
                         switch(sensor.type){
                             case "wifi-counting":
@@ -297,7 +297,7 @@ var util = {
                     Promise.all(promisePool).then((batHits) => {
                     
                     for(let i=0; i < batCells.length; i++){
-                        let batcount = anomaly.includes("tropical") ? Math.random() * 8 : Math.random() * 5; //Up to 8 bats per hit in tropical, 5 for non tropical. Slightly altered for the bat cam
+                        let batcount = anomaly.includes("tropical") ? Math.random() * 9 : Math.random() * 6; //Up to 8 bats per hit in tropical, 5 for non tropical. Slightly altered for the bat cam
                         if(batHits[i]) batCells[i].bats += batcount; 
                         }
                         resolve("Calculation completed");
